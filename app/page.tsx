@@ -25,6 +25,7 @@ export default function Home() {
 
     // Configure stream listen events and what to do
     stream.on(CONSTANTS.STREAM.VIDEO, (data: any) => {
+      console.log(data);
       if (data.event === CONSTANTS.VIDEO.EVENT.REQUEST) {
         // handle call request
         setIncomingWalletAddress(data.peerInfo.address);
@@ -32,10 +33,12 @@ export default function Home() {
 
       if (data.event === CONSTANTS.VIDEO.EVENT.APPROVE) {
         // handle call approve
+        setLoading(false);
       }
 
       if (data.event === CONSTANTS.VIDEO.EVENT.DENY) {
         // handle call denied
+        setLoading(false);
       }
 
       if (data.event === CONSTANTS.VIDEO.EVENT.CONNECT) {
@@ -112,7 +115,14 @@ export default function Home() {
       />
 
       {/* the loader is properly setup */}
-      {/* {loading && <Loader />} */}
+      {loading && (
+        <Loader
+          cancelCall={() => {
+            setLoading(false);
+            init();
+          }}
+        />
+      )}
       {data?.incoming[0].status === CONSTANTS.VIDEO.STATUS.CONNECTED && (
         <VideoPlayer
           data={data}

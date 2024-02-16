@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { RainbowKitProvider, getDefaultConfig } from '@rainbow-me/rainbowkit';
+import * as React from "react";
+import {RainbowKitProvider, getDefaultConfig} from "@rainbow-me/rainbowkit";
 
-import { sepolia, polygonMumbai, mainnet, polygon } from 'wagmi/chains';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { WagmiProvider } from 'wagmi';
+import {sepolia, polygonMumbai, mainnet, polygon} from "wagmi/chains";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {WagmiProvider} from "wagmi";
 
 const config = getDefaultConfig({
-  appName: 'RainbowKit demo',
-  projectId: 'YOUR_PROJECT_ID',
+  appName: "RainbowKit demo",
+  projectId: "cce80d29fdef570238fed73ea961adde",
 
   chains: [sepolia, polygonMumbai, mainnet, polygon],
   ssr: true,
@@ -17,7 +17,7 @@ const config = getDefaultConfig({
 
 const queryClient = new QueryClient();
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({children}: {children: React.ReactNode}) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
